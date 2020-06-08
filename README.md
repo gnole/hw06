@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/gnole/hw06.svg?branch=master)](https://travis-ci.org/gnole/hw06)
 [![Build status](https://ci.appveyor.com/api/projects/status/ato3x89wdapca7di?svg=true)](https://ci.appveyor.com/project/gnole/hw06)
+
 ## Homework VI
 
 После того, как вы настроили взаимодействие с системой непрерывной интеграции,</br>
