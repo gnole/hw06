@@ -213,6 +213,7 @@ EOF
 если **commit** помечен тэгом, то необходимо собрать пакеты (`DEB, RPM, WIX, DragNDrop, ...`) </br>
 и разместить их на сервисе **GitHub**. (см. пример для [Travi CI](https://docs.travis-ci.com/user/deployment/releases))</br>
 
+
 ## Links
 - [DMG](https://cmake.org/cmake/help/latest/module/CPackDMG.html)
 - [DEB](https://cmake.org/cmake/help/latest/module/CPackDeb.html)
