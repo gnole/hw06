@@ -37,7 +37,7 @@ set(SOLVER_VERSION_MAJOR 1)
 % touch ChangeLog.md
 % export DATE="`LANG=en_US date +'%a %b %d %Y'`"
 % cat > ChangeLog.md <<EOF
-* ${DATE} Evgengrmit <evgengrmit@icloud.com> 1.0.0
+* ${DATE} 1.0.0
 - Initial RPM release
 EOF
 ```
@@ -52,8 +52,6 @@ EOF
 ```sh
 % cat >> CPackConfig.cmake <<EOF
 
-# Установка контакта
-set(CPACK_PACKAGE_CONTACT evgengrmit@icloud.com)
 # Установка версии пакета
 set(CPACK_PACKAGE_VERSION_MAJOR \${SOLVER_VERSION_MAJOR})
 set(CPACK_PACKAGE_VERSION_MINOR \${SOLVER_VERSION_MINOR})
@@ -117,13 +115,6 @@ EOF
 Настройки для NSIS-пакета CPACK_NSIS_CONTACT
 ```sh
 % cat >> CPackConfig.cmake <<EOF
-
-# Помощь в установке пакета
-set(CPACK_NSIS_HELP_LINK https://github.com/Evgengrmit/hw06)
-# Помощь в использовании
-set(CPACK_NSIS_URL_INFO_ABOUT https://github.com/Evgengrmit/hw06)
-# Контактная информация
-set(CPACK_NSIS_CONTACT evgengrmit@icloud.com)
 EOF
 ```
 Подключение модуля CPack
@@ -169,17 +160,10 @@ addons:
       - rpm
 EOF
 ```
-Авторизация в `travis-ci` и добавление зашифрованного API-ключа
+Авторизация в `travis-ci`
 ```sh
-% travis login --auto --ppro
-Successfully logged in as Evgengrmit!
-% travis enable --pro
-Evgengrmit/lab06: enabled :)
-% travis setup releases --pro
-Username: Evgengrmit
-Password for Evgengrmit: *************
-Deploy only from Evgengrmit/hw06? |yes| no
-Encrypt API key? |yes| yes
+% travis login --auto
+Successfully logged in as gnole!
 % cat >> CMakeLists.txt <<EOF
 file:
   - ./_build/solver-1.0.0.-Darwin.dmg
@@ -220,47 +204,12 @@ deploy:
   release: $(APPVEYOR_REPO_TAG_NAME)
   description: 'Release description'
   provider: GitHub
-  auth_token:
-    secure: tZdq4qXRLud/z27+KjHqLP0jpdTdUkrQ1XmSJMbSAnd2KTvjSqLjRlueHzHPhzLe
   artifact: print
   on:
     APPVEYOR_REPO_TAG: true
 
 EOF
 ```
-В качестве подсказки:
-```sh
-$ cat .travis.yml
-os: osx
-script:
-...
-- cpack -G DragNDrop # dmg
-
-$ cat .travis.yml
-os: linux
-script:
-...
-- cpack -G DEB # deb
-
-$ cat .travis.yml
-os: linux
-addons:
-  apt:
-    packages:
-    - rpm
-script:
-...
-- cpack -G RPM # rpm
-
-$ cat appveyor.yml
-platform:
-- x86
-- x64
-build_script:
-...
-- cpack -G NSIS # msi
-```
-
 Для этого нужно добавить ветвление в конфигурационные файлы для **CI** со следующей логикой:</br>
 если **commit** помечен тэгом, то необходимо собрать пакеты (`DEB, RPM, WIX, DragNDrop, ...`) </br>
 и разместить их на сервисе **GitHub**. (см. пример для [Travi CI](https://docs.travis-ci.com/user/deployment/releases))</br>
