@@ -224,7 +224,6 @@ EOF
 - [AppVeyour](https://www.appveyor.com/)
 - [GitLab CI](https://about.gitlab.com/gitlab-ci/)
 
-
 ```
 Copyright (c) 2015-2020 The ISC Authors
 ```
